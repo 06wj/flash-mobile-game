@@ -2,6 +2,7 @@ package
 {
 	import org.flixel.FlxG;
 	import org.flixel.FlxGroup;
+	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSprite;
 	/**
@@ -12,7 +13,7 @@ package
 	{
 		[Embed("images/player/player1.png")]
 		protected var playerImg:Class;
-		
+		private var bar:FlxBar;
 		public var speed:uint = 4;
 		public var bullets:FlxGroup;
 		private var _time:Number;
@@ -23,6 +24,7 @@ package
 		{
 			super(x, y);
 			
+			health = 100;
 			_time = 0;
 			loadGraphic(playerImg, true, false, 76, 76, true);
 			addAnimation("动态", [0, 1, 2, 1], 11);
@@ -31,6 +33,8 @@ package
 			addAnimation("中毒", [12, 13], 11);
 			addAnimation("激光", [14, 15], 11);
 			addAnimation("普通攻击", [3, 4], 11);
+			
+			bar = new FlxBar(5, 5, FlxBar.FILL_LEFT_TO_RIGHT, 150, 7, this, "health", 0, health);				
 			
 			this.x -= origin.x;
 			play("动态");
@@ -54,7 +58,7 @@ package
 				y = FlxG.mouse.screenY - _mouseY;
 				checkPosition();
 				
-				if (_time > .3)
+				if (_time > .4)
 				{
 					_time = 0;
 					shoot();
@@ -106,6 +110,7 @@ package
 				play("动态")
 			}
 			
+			bar.update();
 			super.update();
 		}
 		
@@ -136,6 +141,12 @@ package
 			{
 				y = 0;
 			}
+		}
+		
+		override public function draw():void
+		{
+				super.draw();
+				bar.draw();
 		}
 	}
 	

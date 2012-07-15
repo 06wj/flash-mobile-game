@@ -1,8 +1,10 @@
 package 
 {
+	import org.flixel.FlxGroup;
 	import org.flixel.FlxSprite;
 	import org.flixel.plugin.photonstorm.FlxBar;
-	import enemy.EnemyType;
+	import npc.EnemyType;
+	import org.flixel.FlxG;
 	/**
 	 * ...
 	 * @author 06wj
@@ -10,22 +12,23 @@ package
 	public class Enemy extends FlxSprite 
 	{
 		private var bar:FlxBar;
-		static private var num = 0;
-		
-		public function Enemy()
+		protected var _time:Number = 0;
+		protected var num:int = 0;
+		public var bullets:FlxGroup;
+
+		public function Enemy(health:int = 4)
 		{
 			super();
+			this.health = health;
 			loadGraphic(EnemyType.imgs[num], true, false, 70, 70);
 
 			addAnimation("idle", makeFrames(), 11);
 			addAnimation("hurt", [frames - 1], 20, false);
 			
-			bar = new FlxBar(0, 0, 1, width - 12, 3, this, "health", 0, 10);				
+			bar = new FlxBar(0, 0, 1, width - 12, 3, this, "health", 0, health);
 			bar.trackParent(6, -6);
 			
 			init();
-			num ++;
-			if (num > 17) num = 0;
 		}
 		
 		private function makeFrames():Array
@@ -35,7 +38,6 @@ package
 			while (n--)
 			{
 				arr[n + 1] = n;
-				trace(n)
 			}
 			return arr;
 		}
@@ -45,7 +47,7 @@ package
 			revive();
 			x = Math.random() * 250;
 			y = Math.random() * 310;
-			health = _health;
+			//health = _health;
 			play("idle");
 		}
 		
@@ -60,6 +62,24 @@ package
 		{
 			super.update();
 			bar.update();
+			move();
+			_time ++;
+			
+			if (y > 530) 
+			{
+				kill();
+			}
+			
+			if(y < -50 || y > 530) 
+			{
+				destroy();
+				kill(); 
+			}
+		}
+		
+		public function move():void
+		{
+			
 		}
 		
 		override public function draw():void

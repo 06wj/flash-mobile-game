@@ -8,11 +8,11 @@
     <movie fps="30" />
     <movie width="320" />
     <movie height="480" />
-    <movie version="10" />
-    <movie minorVersion="1" />
+    <movie version="11" />
+    <movie minorVersion="0" />
     <movie platform="Flash Player" />
     <movie background="#000000" />
-    <movie preferredSDK="Flex 4.6.0, AIR 3.1;4.6.0, 3.1;" />
+    <movie preferredSDK="Flex 4.6.0, AIR 3.2;4.6.0, 3.2;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -42,7 +42,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-swf-version=15" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
@@ -85,7 +85,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Default" />
+    <option testMovie="Unknown" />
   </options>
   <!-- Plugin storage -->
   <storage />

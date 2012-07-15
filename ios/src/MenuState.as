@@ -27,7 +27,10 @@ package
 		{
 				if (FlxG.mouse.justPressed())
 				{
-					FlxG.switchState(new GameState());
+					if(Math.random()>.5)
+						FlxG.switchState(new GameState2());
+					else
+						FlxG.switchState(new GameState());
 				}
 		}
 	}

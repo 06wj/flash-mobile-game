@@ -9,6 +9,7 @@ package
 	{
 		[Embed("images/maps/埃及.jpg")]
 		protected var mapImg:Class;
+		
 		public function Ground(x:Number = 0, y:Number = -1985):void
 		{
 			super(x, y, mapImg);
@@ -22,8 +23,6 @@ package
 			{
 				this.y = 0;
 			}
-			
-			trace(y)
 		}
 		
 		
